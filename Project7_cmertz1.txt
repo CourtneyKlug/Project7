@@ -1,0 +1,11 @@
+This panda3d project allows you to take a gander at some planets, 
+and a space station, all of which are located in an unknown part of the universe. 
+You can also see the x y and z circles, a gathering of drones over a planet, drones that make
+the seams of a baseball over a different planet, and some drones that like to be playful. The drones are our friend by the way. 
+You're seeing all of this from the perspective of the Player SpaceShip. This machine can move left, right, up, down, and it can even roll to the left or the right. 
+It can propel fowards too of course. It's also able to bump into the 6 planets, the universe itself, the drones, the rocks, and the x y z circle defenses.
+Shooting missiles happens to be its specialty, and the missiles disappear after a few sceonds of being shot out. You'll also have a little help
+from a hud element that will make it easier for you to aim at the objects you want to direct to. The bullets will destroy the planets, the space station, 
+the drones, and the rocks that surround the planets outside or inside. You can also adjust the size of the camera defense area by pressing the "o" or "p" key. 
+This will make defense even tighter for you! Destroy all of the rocks that surround the planets, and you will win the game of Space Jam. 
+This is part 7 of the Space Jam project.
