@@ -214,9 +214,6 @@ class PlayerSpaceship(SphereCollideObject):
                 print(i + ' has reached the end of its fire solution.')
                 
                 break
-            
-            if not Missile.Intervals[i].isPlaying():
-                del Missile.Intervals[i]
 
         return Task.cont
 
@@ -300,6 +297,6 @@ class PlayerSpaceship(SphereCollideObject):
     def SetParticles(self):
         base.enableParticles()
         self.explodeEffect = ParticleEffect()
-        self.explodeEffect.loadConfig("./Assets/Part-Efx/Particles_11-07-2020b.ptf")
+        self.explodeEffect.loadConfig("./Assets/Part-Efx/default_efx.ptf")
         self.explodeEffect.setScale(20)
         self.explodeNode = self.render.attachNewNode('ExplosionEffects')
