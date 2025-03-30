@@ -1,7 +1,10 @@
 import math, random
 from panda3d.core import *
 
+collision_count = 0  # Global or external counter to track unique names
+
 def Camera(render, parent, name, radius, color, axis):
+    global collision_count  # Access the global counter
     x = 0
     for i in range(100):
         theta = x
@@ -14,8 +17,12 @@ def Camera(render, parent, name, radius, color, axis):
             placeholder.setPos(radius * math.cos(theta), 0.0, radius * math.sin(theta))
         placeholder.setColor(*color)
         parent.instanceTo(placeholder)
-         
-        collisioncamera = CollisionNode(name + 'collision')
+        
+        # Generate a unique nickname for the collision node
+        collision_nickname = name + '_collision_' + str(collision_count)
+        collisioncamera = CollisionNode(collision_nickname)
+        collision_count += 1  # Increment the counter for the next collision node
+
         collisioncamera.addSolid(CollisionSphere(0, 0, 0, 3))
         collisionattach = placeholder.attachNewNode(collisioncamera)
         #collisionattach.show()

@@ -242,9 +242,16 @@ class PlayerSpaceship(SphereCollideObject):
         pattern = r'[0-9]'
         strippedString = re.sub(pattern, '', victim)
 
-        if strippedString in ["BaseballDrone", "CloudDrone", "Planet", "Space Station", "Rock"]: 
+        if strippedString in ["BaseballDrone", "CloudDrone", "Planet", "Space Station", "Rock", "x-axis", "y-axis", "z-axis"]: 
             print(victim, ' hit at ', intoPosition)
             self.DestroyObject(victim, intoPosition)
+
+            # Locate and remove the parent node
+            victimNode = entry.getIntoNodePath()
+            parentNode = victimNode.getParent()
+            if not parentNode.isEmpty():  # Ensure the parent exists
+                print(f"Removing parent node: {parentNode.getName()}")
+                parentNode.removeNode()
 
         print(shooter + ' is DONE.')
         Missile.Intervals[shooter].finish()
@@ -293,6 +300,6 @@ class PlayerSpaceship(SphereCollideObject):
     def SetParticles(self):
         base.enableParticles()
         self.explodeEffect = ParticleEffect()
-        self.explodeEffect.loadConfig("./Assets/Part-Efx/default_efx.ptf")
+        self.explodeEffect.loadConfig("./Assets/Part-Efx/Particles_11-07-2020b.ptf")
         self.explodeEffect.setScale(20)
         self.explodeNode = self.render.attachNewNode('ExplosionEffects')

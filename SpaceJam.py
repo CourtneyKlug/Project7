@@ -56,6 +56,7 @@ class MyApp(ShowBase):
         self.Planet6 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, 'Planet6', "./Assets/Planets/2k_mercury.jpg", (0, -900, -1400), 700) 
         self.SpaceStation1 = spaceJamClasses.SpaceStation(self.loader, "./Assets/SpaceStation/spaceStation.egg", self.render, 'Space Station', "./Assets/SpaceStation/SpaceStation1_Dif2.png", (1500, 1000, -100), 40) 
         self.Hero = playerClasses.PlayerSpaceship (self.loader, self.accept, "./Assets/Spaceships/Dumbledore/Dumbledore.egg", self.render, 'Hero', "./Assets/Spaceships/Dumbledore/spacejet_C.png", Vec3(1000, 1200, -50), 50, self.taskMgr, self.render, self.numRocks)
+        self.CameraDefenseSystem = spaceJamClasses.CameraDefense(self.loader, "./Assets/DroneDefender/Camera/sphere.x", self.render, 'CameraDefense', "./Assets/DroneDefender/Camera/sphere1_flat.jpg", (0, 0, 0), 1.0)
 
         self.taskMgr.add(self.Planet1.rotate, "RotatePlanet1")
         self.taskMgr.add(self.Planet2.rotate, "RotatePlanet2")
@@ -96,7 +97,6 @@ class MyApp(ShowBase):
         
         self.taskMgr.add(self.OrbitRocks, "OrbitRocks")
 
-        self.CameraDefense(self.loader, self.render)
         self.DroneSpawn()
         self.SetCamera()
         self.EnableHUD()

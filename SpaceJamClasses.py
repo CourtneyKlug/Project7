@@ -69,6 +69,46 @@ class Drone(SphereCollideObject):
         tex = loader.loadTexture(texPath) 
         self.modelNode.setTexture(tex, 1)
 
+
+class CameraDefense:
+    def __init__(self, loader: Loader, modelPath: str, parentNode: NodePath, nodeName: str, texPath: str, posVec: Vec3, scaleVec: float):
+        # Load the parent model and texture for the camera defense system
+        self.modelNode = parentNode.attachNewNode(nodeName)
+        self.model = loader.loadModel(modelPath)
+        self.model.reparentTo(self.modelNode)
+        self.modelNode.setPos(posVec)
+        self.modelNode.setScale(scaleVec)
+        self.modelNode.setName(nodeName)
+
+        # Apply texture to the model
+        texture = loader.loadTexture(texPath)
+        self.model.setTexture(texture, 1)
+
+        # Set up a collision sphere for the object
+        colliderScale = 0.1  # Adjust collider scaling as necessary
+        collisionNode = CollisionNode(f"{nodeName}_collision")
+        collisionNode.addSolid(CollisionSphere(0, 0, 0, 1))  # Base radius of 1
+        self.collisionNodePath = self.modelNode.attachNewNode(collisionNode)
+        self.collisionNodePath.setScale(colliderScale)
+
+        # Initialize defense paths
+        self.setupDefensePaths(loader, parentNode)
+
+    def setupDefensePaths(self, loader, render):
+        # Create defense paths around the parent model node
+        from DefensePaths import Camera
+        Camera(render, self.modelNode, 'x-axis', 150, (255, 0, 0, 1.0), 'xy-circle')
+        Camera(render, self.modelNode, 'y-axis', 115, (0, 255, 0, 1.0), 'yz-circle')
+        Camera(render, self.modelNode, 'z-axis', 135, (0, 0, 255, 1.0), 'xz-circle')
+
+    def updateCircleScale(self, newScale):
+        # Update the visual scale of the model node
+        self.modelNode.setScale(newScale)
+
+        # Update the collision node separately to maintain its scale independently
+        fixedCollisionScale = 0.1  # Use a fixed size you're comfortable with
+        self.collisionNodePath.setScale(fixedCollisionScale)
+
 class Orbiter(SphereCollideObject):
     numOrbits = 0
     velocity = 0.005
